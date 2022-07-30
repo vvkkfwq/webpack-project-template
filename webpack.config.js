@@ -1,6 +1,10 @@
 const path = require("path");
+// 引入环境变量
+const Dotenv = require('dotenv-webpack');
+// 生成html
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 // const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+// 分离包中的css代码
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 // 构建结果分析
 const BundleAnalyzerPlugin =
@@ -100,6 +104,13 @@ module.exports = {
 
   // 配置插件
   plugins: [
+    new Dotenv({
+      path:
+        process.env.NODE_ENV === "development"
+          ? "./.env.development"
+          : "./.env.production",
+      systemvars: true, // 允許讀取 process.env 下的任意系統變量
+    }),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
       favicon: "./public/webpack.ico"
