@@ -13,6 +13,8 @@ const BundleAnalyzerPlugin =
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 // 内置压缩js插件
 const TerserPlugin = require("terser-webpack-plugin");
+// vue加载器
+const { VueLoaderPlugin } = require('vue-loader')
 
 console.log("process.env.NODE_ENV =", process.env.NODE_ENV); // 打印环境变量
 
@@ -35,7 +37,7 @@ module.exports = {
     // 静态资源本地访问配置
     static: {
       directory: path.join(__dirname, "src/assets"),
-      publicPath: "/src/assets", // 告告诉服务器在哪个 URL 上提供 static.directory 的内容
+      publicPath: "/src/assets", // 告诉服务器在哪个 URL 上提供 static.directory 的内容
       watch: true,
     },
   },
@@ -43,7 +45,7 @@ module.exports = {
   resolve: {
     // 配置别名
     alias: {
-      "@": path.resolve(__dirname, "src"),
+      "@": path.resolve(__dirname, "src")
     },
   },
 
@@ -99,6 +101,10 @@ module.exports = {
           },
         },
       },
+      {
+        test: /\.vue$/,
+        use: 'vue-loader'
+      }
     ],
   },
 
@@ -122,8 +128,10 @@ module.exports = {
       analyzerMode: 'disabled',  // 不启动展示打包报告的http服务器
       // generateStatsFile: true, // 是否生成stats.json文件
     }),
+    new VueLoaderPlugin()
   ],
 
+  // 分包优化
   optimization: {
     splitChunks: {
       cacheGroups: {
