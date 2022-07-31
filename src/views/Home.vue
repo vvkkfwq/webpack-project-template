@@ -1,5 +1,5 @@
 <template>
-  <div>Home</div>
+  <div>Hello Vue</div>
 </template>
 <script>
 export default {
