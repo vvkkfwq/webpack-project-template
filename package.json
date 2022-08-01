@@ -9,7 +9,8 @@
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "lint": "eslint src --fix --ext .vue,.js,.jsx",
     "style": "stylelint \"**/*.{vue,less,postcss,css,scss}\" --fix --custom-syntax postcss-html",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
@@ -30,6 +31,8 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-vue": "^9.3.0",
     "html-webpack-plugin": "^5.5.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.0.3",
     "mini-css-extract-plugin": "^2.6.1",
     "node-sass": "^7.0.1",
     "optimize-css-assets-webpack-plugin": "^6.0.1",
@@ -57,5 +60,23 @@
     "vue": "^2.7.8",
     "vue-router": "^3.5.4",
     "vuex": "^3.6.2"
+  },
+  "lint-staged": {
+    "*.md": [
+      "prettier --write"
+    ],
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{css,scss}": [
+      "prettier --write",
+      "stylelint --fix"
+    ],
+    "*.vue": [
+      "prettier --write",
+      "eslint --fix",
+      "stylelint --fix"
+    ]
   }
 }
