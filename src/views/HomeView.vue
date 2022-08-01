@@ -1,5 +1,8 @@
 <template>
-  <div>Hello Vue</div>
+  <div>
+    Hello Vue
+    <p>test husky</p>
+  </div>
 </template>
 <script>
 export default {
