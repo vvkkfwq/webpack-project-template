@@ -15,6 +15,8 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 // vue加载器
 const { VueLoaderPlugin } = require('vue-loader');
+// ESlint-webpack插件
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 console.log('process.env.NODE_ENV =', process.env.NODE_ENV); // 打印环境变量
 
@@ -129,6 +131,7 @@ module.exports = {
       // generateStatsFile: true, // 是否生成stats.json文件
     }),
     new VueLoaderPlugin(),
+    new ESLintPlugin(),
   ],
 
   // 分包优化
