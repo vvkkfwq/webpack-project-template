@@ -7,6 +7,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 // ESlint-webpack插件
 const ESLintPlugin = require('eslint-webpack-plugin');
+// 在webpack中引入对于环境变量的使用
+require('dotenv').config({ path: '.env.development' });
 
 console.log('process.env.NODE_ENV =', process.env.NODE_ENV); // 打印环境变量
 
@@ -32,6 +34,14 @@ module.exports = {
       directory: path.join(__dirname, 'src/assets'),
       publicPath: '/src/assets', // 告诉服务器在哪个 URL 上提供 static.directory 的内容
       watch: true,
+    },
+    proxy: {
+      '/api': {
+        target: process.env.LOCAL_API_URL,
+        pathRewrite: { '^/api': '' },
+        ws: true,
+        changeOrigin: true,
+      },
     },
   },
 
